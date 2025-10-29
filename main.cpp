@@ -5,6 +5,7 @@ int main() {
     std::cout << "Hello, world!\n";
     std::array<int, 100> v{};
     int nr;
+    int a = 0;
     std::cout << "Introduceți nr: ";
     /////////////////////////////////////////////////////////////////////////
     /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,

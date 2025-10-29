@@ -1,4 +1,4 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# Live-Stock-Trading-App
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
