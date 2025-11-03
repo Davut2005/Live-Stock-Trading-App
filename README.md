@@ -1,4 +1,4 @@
-**Live-Stock-Trading-App**
+#Live-Stock-Trading-App
 
 A real-time stock market simulator and trading dashboard built with C++ backend and React + TypeScript frontend.
 
