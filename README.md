@@ -1,7 +1,13 @@
 #Live-Stock-Trading-App
 
-A real-time stock market simulator and trading dashboard built with C++ backend and React + TypeScript frontend.
+Fullstack Live Stock Trading App is a realistic stock market simulation platform that allows users to track live stock prices, simulate trades, and manage a virtual portfolio — all in real time.
 
+It provides an interactive dashboard where users can watch price movements, buy or sell shares, and analyze portfolio performance — similar to what you’d experience in modern trading apps like Robinhood, eToro, or TradingView.
+
+Unlike typical web-only implementations, this project uses a high-performance C++ backend for handling live data and trading logic, ensuring low latency, efficiency, and near-real-time updates.
+The frontend is built with React and TypeScript, providing a smooth, type-safe, and responsive user interface.
+
+This project demonstrates how frontend technologies and low-level programming can work together to build a modern, data-driven, and performance-oriented application.
 ### Folosiți template-ul corespunzător grupei voastre!
 
 | Laborant  | Link template                                |
