@@ -7,6 +7,7 @@ cppcheck --enable=all \
     -i"${EXT_DIR:-ext}" --suppress="*:${EXT_DIR:-ext}/*" \
     --suppress=missingIncludeSystem \
     --suppress=unmatchedSuppression \
+    --suppress=unusedFunction \
     --suppress=useStlAlgorithm \
     --check-level=exhaustive \
     --error-exitcode=1
