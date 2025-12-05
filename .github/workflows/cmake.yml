@@ -222,12 +222,12 @@ jobs:
 
       - name: Build
         run: |
-          bash ./scripts/cmake.sh build -c ${{ env.BUILD_TYPE }}
+          bash ./backend/scripts/cmake.sh build -c ${{ env.BUILD_TYPE }}
 
       - name: Install
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
         run: |
-          bash ./scripts/cmake.sh install -c ${{ env.BUILD_TYPE }} -i artifacts
+          bash ./bakend/scripts/cmake.sh install -c ${{ env.BUILD_TYPE }} -i artifacts
 
       - name: Move artifacts
         run: |
