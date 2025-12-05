@@ -4,12 +4,6 @@ description: 'Process artifact files'
 runs:
   using: "composite"
   steps:
-    - name: Patch macOS launcher
-      shell: bash
-      if: runner.os == 'macOS'
-      run: |
-        sed -i '' -e "s/oop/${EXECUTABLE_NAME}/" "${{ env.ZIP_NAME }}/launcher.command"
-        chmod +x "${{ env.ZIP_NAME }}/launcher.command"
 
     - name: Copy missing dylibs
       shell: bash
