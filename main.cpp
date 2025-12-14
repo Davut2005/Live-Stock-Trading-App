@@ -1,11 +1,11 @@
 #include <iostream>
 #include <memory>
 
-#include "Portfolio.h"
-#include "TechStock.h"
-#include "CryptoStock.h"
-#include "EnergyStock.h"
-#include "Trader.h"
+#include "./includes/Portfolio.h"
+#include "./includes/TechStock.h"
+#include "./includes/CryptoStock.h"
+#include "./includes/EnergyStock.h"
+#include "./includes/Trader.h"
 
 int main() {
     Portfolio p;
