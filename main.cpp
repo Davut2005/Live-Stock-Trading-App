@@ -7,6 +7,9 @@
 #include "./includes/EnergyStock.h"
 #include "./includes/Trader.h"
 
+#include "./exceptions/StockErrors.h"
+#include "./exceptions/StockException.h"
+
 int main() {
     Portfolio p;
 
@@ -47,6 +50,26 @@ int main() {
 
     std::cout << "\n--- Trader Scenario ---\n";
     Trader trader("Alice", 50000.0);
+
+    try {
+    auto expensiveStock = std::make_unique<TechStock>("AAPL", 100); // price > balance
+    trader.buyStock(std::move(expensiveStock), 1); // should throw InsufficientBalanceException
+}
+catch (const InvalidPriceException& e) { 
+    std::cout << "Price error: " << e.what() << "\n"; 
+}
+catch (const InvalidQuantityException& e) { 
+    std::cout << "Quantity error: " << e.what() << "\n"; 
+}
+catch (const InsufficientBalanceException& e) { 
+    std::cout << "Balance error: " << e.what() << "\n"; 
+}
+catch (const StockException& e) { 
+    std::cout << "Stock error: " << e.what() << "\n"; 
+}
+catch (const std::exception& e) { 
+    std::cout << "Other error: " << e.what() << "\n"; 
+}
 
     trader.buyStock(std::move(apple), 5);
     trader.buyStock(std::move(google), 3);

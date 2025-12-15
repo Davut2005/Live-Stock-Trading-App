@@ -1,5 +1,6 @@
 #include "Stock.h"
-
+#include "../exceptions/StockException.h"
+#include "../exceptions/StockErrors.h"
 
 Stock::Stock() : name("Unknown"), price(0.0), quantity(0) {}
 
@@ -45,7 +46,10 @@ int Stock::getQuantity() const { return quantity; }
 
 
 void Stock::updatePrice(double percentChange) {
-price *= (1 + percentChange / 100);
+    if (percentChange < -100.0) { // cannot reduce price below 0
+        throw InvalidPriceException();
+    }
+    price *= (1 + percentChange / 100);
 }
 
 
@@ -55,12 +59,14 @@ return price * quantity;
 
 
 void Stock::addQuantity(int q) {
-if (q > 0) quantity += q;
+    if (q <= 0) throw InvalidQuantityException();
+    quantity += q;
 }
 
 
 void Stock::removeQuantity(int q) {
-if (q > 0 && q <= quantity) quantity -= q;
+    if (q <= 0 || q > quantity) throw InvalidQuantityException();
+    quantity -= q;
 }
 
 

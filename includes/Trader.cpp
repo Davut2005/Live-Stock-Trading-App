@@ -1,16 +1,19 @@
 #include "Trader.h"
 #include <iostream>
-
+#include "../exceptions/StockException.h"
+#include "../exceptions/StockErrors.h"
 
 Trader::Trader(const std::string& traderName, double b) : m_name(traderName), balance(b) {}
 
 void Trader::buyStock(std::unique_ptr<Stock> s, int quantity) {
 double cost = s->getPrice() * quantity;
-if (balance >= cost) {
+if (balance < cost) {
+    throw InsufficientBalanceException();
+}
 balance -= cost;
 s->addQuantity(quantity);
 portfolio.addStock(std::move(s));
-}
+
 }
 
 
