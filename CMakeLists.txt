@@ -49,16 +49,18 @@ include(cmake/CopyHelper.cmake)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 
-target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE 
-    includes
-    exceptions
-)
 
 add_executable(${MAIN_EXECUTABLE_NAME}
     main.cpp
     includes/Stock.cpp
     includes/Portfolio.cpp
     includes/Trader.cpp   
+)
+
+
+target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE 
+    includes
+    exceptions
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
