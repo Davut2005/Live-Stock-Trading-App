@@ -9,8 +9,8 @@ Portfolio portfolio;
 
 
 public:
-Trader(const std::string& traderName, double b);
+Trader(const std::string& name, double b);
 void buyStock(std::unique_ptr<Stock> s, int quantity);
-void sellStock(const std::string& m_name, int quantity, double price);
+void sellStock(const std::string& name, int quantity, double price);
 void display() const;
 };

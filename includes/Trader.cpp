@@ -14,13 +14,13 @@ portfolio.addStock(std::move(s));
 }
 
 
-void Trader::sellStock(const std::string& m_name, int quantity, double price) {
-Stock* s = portfolio.findStock(m_name);
+void Trader::sellStock(const std::string& name, int quantity, double price) {
+Stock* s = portfolio.findStock(name);
 if (!s || s->getQuantity() < quantity) return;
 s->removeQuantity(quantity);
 balance += quantity * price;
 if (s->getQuantity() == 0)
-portfolio.removeStock(m_name);
+portfolio.removeStock(name);
 }
 
 
