@@ -4,9 +4,12 @@
 
 Stock::Stock() : name("Unknown"), price(0.0), quantity(0) {}
 
+int Stock::totalStocks = 0;
 
 Stock::Stock(const std::string& n, double p, int q)
-: name(n), price(p), quantity(q) {}
+: name(n), price(p), quantity(q) {
+    totalStocks++; 
+}
 
 
 Stock::Stock(const Stock& other)
@@ -65,7 +68,7 @@ void Stock::addQuantity(int q) {
 
 
 void Stock::removeQuantity(int q) {
-    if (q <= 0 || q > quantity) throw InvalidQuantityException();
+if (q <= 0 || q > quantity) throw InvalidQuantityException();
     quantity -= q;
 }
 

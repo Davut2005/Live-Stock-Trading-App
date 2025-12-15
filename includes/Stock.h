@@ -40,8 +40,3 @@ virtual std::unique_ptr<Stock> clone() const = 0;
 friend std::ostream& operator<<(std::ostream& os, const Stock& s);
 };
 
-int Stock::totalStocks = 0;
-
-Stock::Stock(const std::string& n, double p, int q) : name(n), price(p), quantity(q) {
-    totalStocks++; 
-}
