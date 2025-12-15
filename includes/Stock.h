@@ -8,7 +8,8 @@ protected:
     std::string name;
     double price;
     int quantity;
-
+   
+    static int totalStocks;
 
 public:
     Stock();
@@ -18,7 +19,7 @@ public:
     Stock(Stock&& other) noexcept;
     Stock& operator=(Stock&& other) noexcept;
     virtual ~Stock();
-
+    static int getTotalStocks() { return totalStocks; }
 
 const std::string& getName() const;
 double getPrice() const;
@@ -38,3 +39,9 @@ virtual std::unique_ptr<Stock> clone() const = 0;
 
 friend std::ostream& operator<<(std::ostream& os, const Stock& s);
 };
+
+int Stock::totalStocks = 0;
+
+Stock::Stock(const std::string& n, double p, int q) : name(n), price(p), quantity(q) {
+    totalStocks++; 
+}

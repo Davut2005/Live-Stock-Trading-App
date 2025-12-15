@@ -6,19 +6,12 @@
 #include "./includes/CryptoStock.h"
 #include "./includes/EnergyStock.h"
 #include "./includes/Trader.h"
+#include "./includes/HealthStock.h"
 
 #include "./exceptions/StockErrors.h"
 #include "./exceptions/StockException.h"
 
 int main() {
-    Portfolio p;
-
-    p.addStock(std::make_unique<TechStock>("AAPL_P", 180));
-    p.addStock(std::make_unique<CryptoStock>("BTC_P", 30000));
-
-
-    p.showAll();    
-    p.showTechStocks();
 
     std::vector<std::unique_ptr<Stock>> stocks;
 
@@ -34,6 +27,20 @@ int main() {
     std::cout << "--- Creating Energy Stocks ---\n";
     auto exxon = std::make_unique<EnergyStock>("XOM", 110.0);
     auto chevron = std::make_unique<EnergyStock>("CVX", 160.0);
+
+    std::cout << "--- Creating Health Stock ---\n";
+    auto pfizer = std::make_unique<HealthStock>("PFE", 45);
+
+
+    Portfolio p;
+
+    p.addStock(std::make_unique<TechStock>("AAPL_P", 180));
+    p.addStock(std::make_unique<CryptoStock>("BTC_P", 30000));
+
+    p.addStock(std::move(pfizer));
+
+    p.showAll();    
+    p.showTechStocks();
 
     std::cout << "\n--- Using Member Functions ---\n";
     apple->addQuantity(10);
