@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Trader::Trader(const std::string& n, double b) : name(n), balance(b) {}
+Trader::Trader(const std::string& traderName, double b) : name(traderName), balance(b) {}
 
 
 void Trader::buyStock(std::unique_ptr<Stock> s, int quantity) {
