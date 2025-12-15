@@ -54,7 +54,8 @@ add_executable(${MAIN_EXECUTABLE_NAME}
     main.cpp
     includes/Stock.cpp
     includes/Portfolio.cpp
-    includes/Trader.cpp   
+    includes/Trader.cpp
+    includes/HealthStock.cpp    
 )
 
 
