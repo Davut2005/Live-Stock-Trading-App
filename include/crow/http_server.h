@@ -23,11 +23,11 @@
 #include <thread>
 #include <vector>
 
-#include "crow/version.h"
-#include "crow/http_connection.h"
-#include "crow/logging.h"
-#include "crow/task_timer.h"
-#include "crow/socket_acceptors.h"
+#include "./version.h"
+#include "./http_connection.h"
+#include "./logging.h"
+#include "./task_timer.h"
+#include "./socket_acceptors.h"
 
 
 namespace crow // NOTE: Already documented in "crow/app.h"

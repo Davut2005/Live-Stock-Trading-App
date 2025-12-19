@@ -60,12 +60,24 @@ add_executable(${MAIN_EXECUTABLE_NAME}
     includes/SellOrder.cpp
     includes/Logger.cpp
     includes/ScopeTimer.cpp
+    includes/Transaction.cpp
+    includes/TransactionLog.cpp
+
+    data/CryptoStockData.cpp
+    data/EnergyStockData.cpp
+    data/HealthStockData.cpp
+    data/TechStockData.cpp
+    data/TraderData.cpp
 )
 
 
 target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE 
     includes
     exceptions
+)
+
+add_executable(server
+    server.cpp
 )
 
 target_include_directories(server PRIVATE

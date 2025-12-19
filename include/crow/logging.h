@@ -1,6 +1,6 @@
 #pragma once
 
-#include "crow/settings.h"
+#include "./settings.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -13,6 +13,7 @@ namespace crow
 {
     enum class LogLevel
     {
+        
 #ifndef ERROR
 #ifndef DEBUG
         DEBUG = 0,

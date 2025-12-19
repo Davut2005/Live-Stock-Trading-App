@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <sstream>
 
-Transaction::Transaction(Type type, const std::string &ticker, int quantity,
+Transaction::Transaction(Type type, int quantity,
                          double price)
     : type(type), quantity(quantity), price(price),
       timestamp(std::chrono::system_clock::now()) {}
@@ -12,7 +12,7 @@ std::string Transaction::toString() const {
 
   auto t = std::chrono::system_clock::to_time_t(timestamp);
 
-  ss << (type == Type::BUY ? "BUY" : "SELL") << " | " << ticker
+  ss << (type == Type::BUY ? "BUY" : "SELL") << " | " 
      << " | Qty: " << quantity << " | Price: " << price
      << " | Time: " << std::put_time(std::localtime(&t), "%F %T");
 
