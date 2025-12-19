@@ -2,6 +2,10 @@
 #include <iostream>
 #include <algorithm>
 #include "TechStock.h"
+#include "Order.h"
+#include "BuyOrder.h"
+#include "SellOrder.h"
+#include "../exceptions/StockErrors.h"
 
 Portfolio::Portfolio(const Portfolio& other) {
     for (const auto& s : other.stocks) {
@@ -58,4 +62,22 @@ void Portfolio::showAll() const {
     for (const auto& s : stocks) {
         s->display(); 
     }
+}
+
+void Portfolio::executeOrder(const Order& order) {
+    order.execute(*this);
+}
+
+void Portfolio::buyStock(const std::string& name, int qty) {
+    auto stock = findStock(name); 
+    if (!stock) throw StockNotFoundException(name);
+
+    stock->addQuantity(qty);
+}
+
+void Portfolio::sellStock(const std::string& name, int qty) {
+    auto stock = findStock(name);
+    if (!stock) throw StockNotFoundException(name);
+
+    stock->removeQuantity(qty);
 }

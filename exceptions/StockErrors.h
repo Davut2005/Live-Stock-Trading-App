@@ -18,3 +18,10 @@ public:
     InsufficientBalanceException()
         : StockException("Insufficient balance") {}
 };
+
+class StockNotFoundException : public StockException {
+public:
+    StockNotFoundException(const std::string& name)
+        : StockException("Stock not found: " + name) {}
+};
+

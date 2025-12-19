@@ -55,7 +55,11 @@ add_executable(${MAIN_EXECUTABLE_NAME}
     includes/Stock.cpp
     includes/Portfolio.cpp
     includes/Trader.cpp
-    includes/HealthStock.cpp    
+    includes/HealthStock.cpp 
+    includes/BuyOrder.cpp
+    includes/SellOrder.cpp
+    includes/Logger.cpp
+    includes/ScopeTimer.cpp
 )
 
 
