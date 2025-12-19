@@ -4,13 +4,10 @@
 
 class StockException : public std::exception {
 protected:
-    std::string message;
+  std::string message;
 
 public:
-    explicit StockException(std::string msg)
-        : message(std::move(msg)) {}
+  explicit StockException(std::string msg) : message(std::move(msg)) {}
 
-    const char* what() const noexcept override {
-        return message.c_str();
-    }
+  const char *what() const noexcept override { return message.c_str(); }
 };

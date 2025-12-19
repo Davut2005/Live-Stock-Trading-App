@@ -4,12 +4,9 @@
 
 class SellOrder : public Order {
 public:
-    SellOrder(const std::string& name, int qty)
-        : Order(name, qty) {}
+  SellOrder(const std::string &name, int qty) : Order(name, qty) {}
 
-    OrderType getType() const override {
-        return OrderType::SELL;
-    }
+  OrderType getType() const override { return OrderType::SELL; }
 
-    void execute(Portfolio& portfolio) const override;
+  void execute(Portfolio &portfolio) const override;
 };

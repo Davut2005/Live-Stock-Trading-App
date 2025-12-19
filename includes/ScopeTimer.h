@@ -4,10 +4,10 @@
 
 class ScopeTimer {
 private:
-    std::string label; 
-    std::chrono::steady_clock::time_point start;
+  std::string label;
+  std::chrono::steady_clock::time_point start;
 
 public:
-    explicit ScopeTimer(std::string label);
-    ~ScopeTimer();
+  explicit ScopeTimer(std::string label);
+  ~ScopeTimer();
 };
