@@ -85,7 +85,9 @@ target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE
 
 target_include_directories(server PRIVATE
     ${CMAKE_SOURCE_DIR}/includes/Crow
+    /usr/include
 )
+
 
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
