@@ -1,3 +1,5 @@
+#define CROW_USE_ASIO
+
 #include "server.h"
 #include "./include/crow.h"  
 #include "./includes/TechStock.h"  
