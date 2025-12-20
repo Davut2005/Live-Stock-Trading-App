@@ -1,0 +1,27 @@
+# .github/workflows/build.yml
+name: Build C++ Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Install dependencies, including asio
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y libasio-dev g++ cmake ninja-build
+
+    # Configure and build
+    - name: Build
+      run: |
+        mkdir -p build
+        cd build
+        cmake ..
+        cmake --build . -- -j$(nproc)
