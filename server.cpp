@@ -11,10 +11,11 @@ void runServer() {
 
     
     CROW_ROUTE(app, "/stocks")
-    ([&]() {
-        std::stringstream ss;
-        portfolio.showAll();  
-        return ss.str();
+    ([](){
+        std::ostringstream ss;
+        ss << "Portfolio:\n";
+        portfolio.showAllToStream(ss);         
+        return crow::response{ ss.str() };
     });
 
     
@@ -38,4 +39,10 @@ void runServer() {
     });
 
     app.port(18080).multithreaded().run();
+}
+
+int main()
+{
+    runServer();
+    return 0;
 }

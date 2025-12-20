@@ -1,3 +1,26 @@
+set(PROJECT_SOURCES
+
+    ./includes/Trader.cpp
+    ./includes/Portfolio.cpp
+    ./includes/Logger.cpp
+    ./includes/ScopeTimer.cpp
+    ./includes/Stock.cpp
+    ./includes/HealthStock.cpp
+    ./includes/Transaction.cpp
+    ./includes/TransactionLog.cpp
+    ./includes/BuyOrder.cpp
+    ./includes/SellOrder.cpp
+    
+    ./data/CryptoStockData.cpp
+    ./data/EnergyStockData.cpp
+    ./data/HealthStockData.cpp
+    ./data/TechStockData.cpp
+    ./data/TraderData.cpp
+)
+
+
+include_directories(/usr/include)
+
 cmake_minimum_required(VERSION 3.26)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
@@ -50,25 +73,8 @@ include(cmake/CopyHelper.cmake)
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 
 
-add_executable(${MAIN_EXECUTABLE_NAME}
-    main.cpp
-    includes/Stock.cpp
-    includes/Portfolio.cpp
-    includes/Trader.cpp
-    includes/HealthStock.cpp 
-    includes/BuyOrder.cpp
-    includes/SellOrder.cpp
-    includes/Logger.cpp
-    includes/ScopeTimer.cpp
-    includes/Transaction.cpp
-    includes/TransactionLog.cpp
-
-    data/CryptoStockData.cpp
-    data/EnergyStockData.cpp
-    data/HealthStockData.cpp
-    data/TechStockData.cpp
-    data/TraderData.cpp
-)
+add_executable(oop main.cpp ${PROJECT_SOURCES})
+add_executable(server server.cpp ${PROJECT_SOURCES})
 
 
 target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE 
@@ -76,9 +82,6 @@ target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE
     exceptions
 )
 
-add_executable(server
-    server.cpp
-)
 
 target_include_directories(server PRIVATE
     ${CMAKE_SOURCE_DIR}/includes/Crow

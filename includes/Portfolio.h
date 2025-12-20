@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <memory>
 #include <vector>
+#include <ostream>
 
 class Portfolio {
   std::vector<std::unique_ptr<Stock>> stocks;
@@ -19,6 +20,7 @@ public:
   void removeStock(const std::string &name);
   double totalValue() const;
   void showAll() const;
+  void showAllToStream(std::ostream& os) const;
   void executeOrder(const Order &order);
   void buyStock(const std::string &name, int qty);
   void sellStock(const std::string &name, int qty);

@@ -76,3 +76,14 @@ void Portfolio::sellStock(const std::string &name, int qty) {
 
   stock->removeQuantity(qty);
 }
+
+void Portfolio::showAllToStream(std::ostream& os) const 
+{
+    for (const auto& stock : stocks)  
+    {
+        os << stock->getName() 
+           << " | Price: " << stock->getPrice() 
+           << " | Qty: " << stock->getQuantity()
+           << "\n";
+    }
+}
