@@ -88,6 +88,10 @@ target_include_directories(server PRIVATE
     /usr/include
 )
 
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/third-party/asio-asio-1-36-0/asio/include
+)
 
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
