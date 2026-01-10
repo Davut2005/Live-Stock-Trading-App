@@ -1,1 +1,16 @@
 ext/** linguist-vendored
+# Treat all text files as text and normalize line endings
+* text=auto
+
+# Specific extensions for C++ source code
+*.cpp text
+*.hpp text
+*.h text
+
+# Binary files (don’t try to merge)
+*.png binary
+*.jpg binary
+*.pdf binary
+
+# Optional: force LF for shell scripts
+*.sh text eol=lf
