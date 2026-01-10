@@ -1,122 +1,82 @@
-set(PROJECT_SOURCES
-
-    ./includes/Trader.cpp
-    ./includes/Portfolio.cpp
-    ./includes/Logger.cpp
-    ./includes/ScopeTimer.cpp
-    ./includes/Stock.cpp
-    ./includes/HealthStock.cpp
-    ./includes/Transaction.cpp
-    ./includes/TransactionLog.cpp
-    ./includes/BuyOrder.cpp
-    ./includes/SellOrder.cpp
-    
-    ./data/CryptoStockData.cpp
-    ./data/EnergyStockData.cpp
-    ./data/HealthStockData.cpp
-    ./data/TechStockData.cpp
-    ./data/TraderData.cpp
-)
-
-
-include_directories(/usr/include)
-
 cmake_minimum_required(VERSION 3.26)
 
-# NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
-# for now, the project name is used as the executable name
-set(MAIN_PROJECT_NAME "oop")
-set(MAIN_EXECUTABLE_NAME "${MAIN_PROJECT_NAME}")
-
-
+# Project name
+set(MAIN_PROJECT_NAME "oop_executable")
 project(${MAIN_PROJECT_NAME})
-# set(CMAKE_PROJECT_VERSION_MAJOR 0)
-# set(CMAKE_PROJECT_VERSION_MINOR 0)
-# set(CMAKE_PROJECT_VERSION_PATCH 1)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Project sources
+set(PROJECT_SOURCES
+    includes/Trader.cpp
+    includes/Portfolio.cpp
+    includes/Logger.cpp
+    includes/ScopeTimer.cpp
+    includes/Stock.cpp
+    includes/HealthStock.cpp
+    includes/Transaction.cpp
+    includes/TransactionLog.cpp
+    includes/BuyOrder.cpp
+    includes/SellOrder.cpp
+    
+    data/CryptoStockData.cpp
+    data/EnergyStockData.cpp
+    data/HealthStockData.cpp
+    data/TechStockData.cpp
+    data/TraderData.cpp
+)
+
+# External cmake scripts
 include(cmake/Options.cmake)
 include(cmake/CompilerFlags.cmake)
 include(cmake/CopyHelper.cmake)
 
-###############################################################################
+# ---------------------------
+# External dependencies
+# ---------------------------
 
-# external dependencies with FetchContent
-# include(FetchContent)
-#
-# set(FETCHCONTENT_QUIET OFF)
-# set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
-#
-# NOTE: Also update env vars used for caching in
-#         - .github/actions/configure-cmake/action.yml
-#         - .github/workflows/cmake.yml
-# FetchContent_Declare(
-#         SomeLib
-#         GIT_REPOSITORY https://github.com/<SomeUser>/<SomeLib>.git
-#         GIT_TAG        <some_git_hash> # <which tag/branch @ <some_date>>
-#         GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
-# )
-#
-# FetchContent_MakeAvailable(SomeLib)
+# ASIO path (committed in third-party folder)
+set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/third-party/asio-asio-1-36-0/asio/include")
 
-###############################################################################
+# ---------------------------
+# Executables
+# ---------------------------
 
-# external dependencies with find_package
-
-# find_package(Threads REQUIRED)
-
-###############################################################################
-
-# NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-
-
-add_executable(oop main.cpp ${PROJECT_SOURCES})
+add_executable(${MAIN_PROJECT_NAME} main.cpp ${PROJECT_SOURCES})
 add_executable(server server.cpp ${PROJECT_SOURCES})
 
+# ---------------------------
+# Include directories
+# ---------------------------
 
-target_include_directories(${MAIN_EXECUTABLE_NAME} PRIVATE 
-    includes
-    exceptions
+target_include_directories(${MAIN_PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/includes
+    ${CMAKE_SOURCE_DIR}/exceptions
+    ${ASIO_INCLUDE_DIR}
 )
 
-
 target_include_directories(server PRIVATE
+    ${CMAKE_SOURCE_DIR}/includes
+    ${CMAKE_SOURCE_DIR}/exceptions
     ${CMAKE_SOURCE_DIR}/includes/Crow
+    ${ASIO_INCLUDE_DIR}
     /usr/include
 )
 
-target_include_directories(${PROJECT_NAME}
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/third-party/asio-asio-1-36-0/asio/include
-)
+# ---------------------------
+# Compiler flags
+# ---------------------------
 
+set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_PROJECT_NAME})
 
-# NOTE: Add all defined targets (e.g. executables, libraries, etc. )
-# NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
-set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_EXECUTABLE_NAME})
-# set_compiler_flags(TARGET_NAMES ${MAIN_EXECUTABLE_NAME} ${FOO} ${BAR})
-# where ${FOO} and ${BAR} represent additional executables or libraries
-# you want to compile with the set compiler flags
+# ---------------------------
+# Install & copy helpers
+# ---------------------------
 
-###############################################################################
+install(TARGETS ${MAIN_PROJECT_NAME} DESTINATION ${DESTINATION_DIR})
 
-# use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
-# target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-# target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
-# target_link_directories(${MAIN_EXECUTABLE_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-# target_link_libraries(${MAIN_EXECUTABLE_NAME} <SomeLib>)
-
-###############################################################################
-
-# copy binaries to "bin" folder; these are uploaded as artifacts on each release
-# DESTINATION_DIR is set as "bin" in cmake/Options.cmake:6
-
-install(TARGETS ${MAIN_EXECUTABLE_NAME} DESTINATION ${DESTINATION_DIR})
-
-
-copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
-# copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
-# copy_files(DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_PROJECT_NAME})
+# copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_PROJECT_NAME})
+# copy_files(DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_PROJECT_NAME})
