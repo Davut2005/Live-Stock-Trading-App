@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 
 # Project name
-set(MAIN_PROJECT_NAME "oop_executable")
+set(MAIN_PROJECT_NAME "oop")
 project(${MAIN_PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 23)
