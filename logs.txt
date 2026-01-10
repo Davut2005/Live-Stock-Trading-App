@@ -1,0 +1,8 @@
+[19:39:49] [INFO] BUY transaction recorded for AAPL x1
+[19:39:49] [INFO] BUY transaction recorded for AAPL x5
+[19:39:49] [INFO] BUY transaction recorded for GOOG x3
+[19:39:49] [INFO] BUY transaction recorded for BTC x1
+[19:39:49] [INFO] BUY transaction recorded for ETH x1
+[19:39:49] [INFO] BUY transaction recorded for XOM x5
+[19:39:49] [INFO] BUY transaction recorded for CVX x4
+[19:39:49] [INFO] SELL transaction recorded for 1

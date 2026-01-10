@@ -65,6 +65,13 @@ target_include_directories(server PRIVATE
     /usr/include
 )
 
+# Link Winsock library for ASIO on Windows
+if(WIN32)
+    # Link server and oop with Windows networking libraries
+    target_link_libraries(oop PRIVATE ws2_32 mswsock advapi32)
+    target_link_libraries(server PRIVATE ws2_32 mswsock advapi32)
+endif()
+
 # ---------------------------
 # Compiler flags
 # ---------------------------
