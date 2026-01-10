@@ -1,20 +1,36 @@
-#!/usr/bin/bash
-set -e  # stop on any error
+#!/usr/bin/env bash
 
-echo "Starting Cppcheck..."
+# Never fail the CI because of cppcheck findings
+set +e
 
-cppcheck --enable=all \
-    --inline-suppr \
-    --project="${BUILD_DIR:-build}"/compile_commands.json \
-    -i"${BUILD_DIR:-build}" --suppress="*:${BUILD_DIR:-build}/*" \
-    -i"${EXT_DIR:-ext}" --suppress="*:${EXT_DIR:-ext}/*" \
-    --suppress=missingIncludeSystem \
-    --suppress=unmatchedSuppression \
-    --suppress=unusedFunction \
-    --suppress=useStlAlgorithm \
-    --check-level=exhaustive 2>&1 | tee cppcheck.log
+echo "Starting Cppcheck (GitHub-safe mode)..."
 
-echo "Cppcheck completed successfully"
+BUILD_DIR="${BUILD_DIR:-build}"
+EXT_DIR="${EXT_DIR:-third-party}"
 
-# Ensure the action doesn't fail even if cppcheck finds warnings
+# Ensure compile_commands.json exists
+if [ ! -f "${BUILD_DIR}/compile_commands.json" ]; then
+  echo "WARNING: ${BUILD_DIR}/compile_commands.json not found. Skipping cppcheck."
+  exit 0
+fi
+
+cppcheck \
+  --enable=all \
+  --check-level=exhaustive \
+  --inline-suppr \
+  --project="${BUILD_DIR}/compile_commands.json" \
+  -i"${BUILD_DIR}" \
+  -i"${EXT_DIR}" \
+  --suppress=missingIncludeSystem \
+  --suppress=unmatchedSuppression \
+  --suppress=unusedFunction \
+  --suppress=useStlAlgorithm \
+  --max-ctu-depth=2 \
+  --timeout=300 \
+  --force \
+  --quiet \
+  2>&1 | tee cppcheck.log
+
+echo "Cppcheck finished (warnings allowed)."
+
 exit 0
