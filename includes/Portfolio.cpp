@@ -4,6 +4,8 @@
 #include "Order.h"
 #include "SellOrder.h"
 #include "TechStock.h"
+#include "Accumulator.h"
+
 #include <algorithm>
 #include <iostream>
 
@@ -47,16 +49,24 @@ void Portfolio::removeStock(const std::string &name) {
 }
 
 double Portfolio::totalValue() const {
-  double sum = 0;
-  for (const auto &s : stocks)
-    sum += s->totalValue();
-  return sum;
+    Accumulator<double> valueAccumulator;   // instantiation #1 (double)
+
+    for (const auto& s : stocks)
+        valueAccumulator.add(s->totalValue());
+
+    return valueAccumulator.sum();
 }
 
 void Portfolio::showAll() const {
-  for (const auto &s : stocks) {
-    s->display();
-  }
+    Accumulator<int> quantityAccumulator;   // instantiation #2 (int)
+
+    for (const auto& s : stocks) {
+        s->display();
+        quantityAccumulator.add(s->getQuantity());
+    }
+
+    std::cout << "Total quantity of all stocks: "
+              << quantityAccumulator.sum() << '\n';
 }
 
 void Portfolio::executeOrder(const Order &order) { order.execute(*this); }
