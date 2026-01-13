@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
     includes/TransactionLog.cpp
     includes/BuyOrder.cpp
     includes/SellOrder.cpp
+    includes/StockFactory.cpp
     
     data/CryptoStockData.cpp
     data/EnergyStockData.cpp

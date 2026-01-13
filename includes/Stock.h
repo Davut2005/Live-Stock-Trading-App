@@ -33,6 +33,7 @@ public:
   virtual void display() const;
   virtual std::string getType() const = 0;
 
+  // Implementing the Prototype Design pattern
   virtual std::unique_ptr<Stock> clone() const = 0;
 
   friend std::ostream &operator<<(std::ostream &os, const Stock &s);

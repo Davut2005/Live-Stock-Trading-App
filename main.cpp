@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 
-
+#include "./includes/StockFactory.h"
 #include "./includes/CryptoStock.h"
 #include "./includes/EnergyStock.h"
 #include "./includes/HealthStock.h"
@@ -32,7 +32,15 @@ int main() {
   std::cout << "--- Creating Health Stock ---\n";
   auto pfizer = std::make_unique<HealthStock>("PFE", 45);
 
+  auto msft = StockFactory::create("tech", "MSFT", 420.50, 8);
+  auto sol = StockFactory::create("crypto", "SOL", 145.20, 20);
+  auto xom = StockFactory::create("energy", "XOM", 113.40, 15);
+
   Portfolio p;
+
+  p.addStock(std::move(msft));
+  p.addStock(std::move(sol));
+  p.addStock(std::move(xom));
 
   p.addStock(std::make_unique<TechStock>("AAPL_P", 180));
   p.addStock(std::make_unique<CryptoStock>("BTC_P", 30000));

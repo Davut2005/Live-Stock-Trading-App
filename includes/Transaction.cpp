@@ -7,6 +7,7 @@ Transaction::Transaction(Type type, int quantity,
     : type(type), quantity(quantity), price(price),
       timestamp(std::chrono::system_clock::now()) {}
 
+      
 std::string Transaction::toString() const {
   std::stringstream ss;
 

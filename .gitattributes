@@ -2,6 +2,13 @@ ext/** linguist-vendored
 # Treat all text files as text and normalize line endings
 * text=auto
 
+
+# Exclude third-party libraries from language statistics
+third-party/** linguist-vendored
+libs/** linguist-vendored
+
+
+
 # Specific extensions for C++ source code
 *.cpp text
 *.hpp text
