@@ -11,5 +11,5 @@ public:
         return OrderType::BUY;
     }
 
-    void execute(Portfolio& portfolio) const override;
+    void execute(class Trader &trader, class Portfolio &portfolio, double price) const override;
 };

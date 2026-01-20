@@ -21,7 +21,12 @@ set(PROJECT_SOURCES
     includes/BuyOrder.cpp
     includes/SellOrder.cpp
     includes/StockFactory.cpp
-    
+    includes/MarketDataManager.cpp
+    includes/RiskManager.cpp
+    includes/TradingEngine.cpp
+    includes/OrderBook.cpp
+    includes/PerformanceAnalyzer.cpp
+
     data/CryptoStockData.cpp
     data/EnergyStockData.cpp
     data/HealthStockData.cpp

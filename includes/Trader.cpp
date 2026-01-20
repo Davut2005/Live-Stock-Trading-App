@@ -50,3 +50,14 @@ void Trader::display() const {
 double Trader::getBalance() const {
     return balance;
 }
+
+void Trader::debit(double amount) {
+    if (balance < amount) {
+        throw InsufficientBalanceException();
+    }
+    balance -= amount;
+}
+
+void Trader::credit(double amount) {
+    balance += amount;
+}

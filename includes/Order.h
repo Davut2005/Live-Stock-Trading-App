@@ -14,9 +14,10 @@ public:
   virtual ~Order() = default;
 
   const std::string &getStockName() const { return stockName; }
+  std::string getStockSymbol() const { return stockName; }
   int getQuantity() const { return quantity; }
 
   virtual OrderType getType() const = 0;
 
-  virtual void execute(class Portfolio &portfolio) const = 0;
+  virtual void execute(class Trader &trader, class Portfolio &portfolio, double price) const = 0;
 };

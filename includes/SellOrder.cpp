@@ -1,5 +1,7 @@
 #include "SellOrder.h"
+#include "Trader.h"
 
-void SellOrder::execute(Portfolio &portfolio) const {
-  portfolio.sellStock(stockName, quantity);
+void SellOrder::execute(Trader& trader, Portfolio& portfolio, double price) const {
+    portfolio.sellStock(stockName, quantity);
+    trader.credit(quantity * price);
 }

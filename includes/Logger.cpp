@@ -49,3 +49,7 @@ void Logger::error(const std::string &msg) {
 void Logger::trade(const std::string &msg) {
   logRaw(timestamp() + " [TRADE] " + msg);
 }
+
+void Logger::log(const std::string &msg) {
+    info(msg);
+}

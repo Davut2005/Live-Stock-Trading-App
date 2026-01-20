@@ -20,9 +20,11 @@ private:
 
 public:
   static Logger &instance();
+  static Logger &getInstance() { return instance(); }
 
   void info(const std::string &msg);
   void error(const std::string &msg);
   void trade(const std::string &msg);
   void logRaw(const std::string &msg);
+  void log(const std::string &msg);
 };
