@@ -14,4 +14,5 @@ public:
   void buyStock(std::unique_ptr<Stock> s, int quantity);
   void sellStock(const std::string &name, int quantity, double price);
   void display() const;
+  double getBalance() const;
 };

@@ -46,3 +46,7 @@ void Trader::display() const {
   std::cout << "Trader: " << m_name << " | Balance: " << balance << '\n';
   portfolio.showAll();
 }
+
+double Trader::getBalance() const {
+    return balance;
+}

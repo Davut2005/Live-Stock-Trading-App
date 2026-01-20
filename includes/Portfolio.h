@@ -24,4 +24,5 @@ public:
   void executeOrder(const Order &order);
   void buyStock(const std::string &name, int qty);
   void sellStock(const std::string &name, int qty);
+  const std::vector<std::unique_ptr<Stock>>& getStocks() const;
 };
