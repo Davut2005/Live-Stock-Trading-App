@@ -69,7 +69,7 @@ void Portfolio::showAll() const {
               << quantityAccumulator.sum() << '\n';
 }
 
-void Portfolio::executeOrder(const Order &order) { order.execute(*this); }
+
 
 void Portfolio::buyStock(const std::string &name, int qty) {
   auto stock = findStock(name);
