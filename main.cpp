@@ -11,7 +11,10 @@
 
 #include "./includes/TechnicalAnalysis.h"
 #include "./includes/MarketSimulator.h"
+#include "./includes/StrategyOptimizer.h"
+#include "./includes/PatternRecognition.h"
 #include "./includes/HistoricalData.h"
+
 #include "./exceptions/StockErrors.h"
 #include "./exceptions/StockException.h"
 
@@ -105,7 +108,7 @@ int main() {
   if (HistoricalData::hasData("AAPL")) {
       auto hist = HistoricalData::get("AAPL");
       std::vector<double> closes;
-      for(const auto& p : hist) closes.push_back(p.close);
+      for(const auto& point : hist) closes.push_back(point.close);
       
       auto sma20 = TechnicalAnalysis::calculateSMA(closes, 20);
       auto rsi14 = TechnicalAnalysis::calculateRSI(closes, 14);
@@ -124,6 +127,37 @@ int main() {
   std::cout << "Expected Price: " << res.expectedPrice << "\n";
   std::cout << "Best Case (95%): " << res.bestCase << "\n";
   std::cout << "Worst Case (5%): " << res.worstCase << "\n";
+
+  std::cout << "\n--- Strategy Optimization (Genetic Algo) ---\n";
+  if (HistoricalData::hasData("AAPL")) {
+      auto hist = HistoricalData::get("AAPL");
+      std::vector<double> prices;
+      for(const auto& p : hist) prices.push_back(p.close);
+      
+      // Limit data for speed in demo
+      if(prices.size() > 500) prices.resize(500);
+
+      StrategyOptimizer optimizer(50, 10, 0.1); // 50 pop, 10 gens
+      auto bestParams = optimizer.optimize(prices);
+      
+      std::cout << "Best Strategy Found:\n";
+      std::cout << "RSI Period: " << bestParams.rsiPeriod << "\n";
+      std::cout << "Stop Loss: " << bestParams.stopLoss * 100 << "%\n";
+      std::cout << "ROI: " << bestParams.fitness << "%\n";
+  }
+
+  std::cout << "\n--- Pattern Recognition ---\n";
+  if (HistoricalData::hasData("BTC")) {
+       auto hist = HistoricalData::get("BTC");
+       auto patterns = PatternRecognition::scan(hist);
+       std::cout << "Found " << patterns.size() << " patterns in BTC history.\n";
+       int count = 0;
+       for(const auto& p : patterns) {
+           if(count++ > 5) break; 
+           std::cout << "Date: " << p.date << " Type: " << p.type << " Reliability: " << p.reliability << "\n";
+       }
+  }
+
 
   std::cout << "\n--- End of Program ---\n";
   return 0;

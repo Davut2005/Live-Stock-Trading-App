@@ -31,6 +31,8 @@ set(PROJECT_SOURCES
     includes/PerformanceAnalyzer.cpp
     includes/MarketSimulator.cpp
     includes/TechnicalAnalysis.cpp
+    includes/StrategyOptimizer.cpp
+    includes/PatternRecognition.cpp
 
     data/CryptoStockData.cpp
     data/EnergyStockData.cpp
