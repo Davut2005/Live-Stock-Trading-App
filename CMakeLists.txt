@@ -40,6 +40,13 @@ set(PROJECT_SOURCES
     data/TechStockData.cpp
     data/TraderData.cpp
     data/HistoricalData.cpp
+
+    exceptions/MarketDataException.cpp
+    exceptions/OrderExecutionException.cpp
+    exceptions/NetworkException.cpp
+    exceptions/StrategyException.cpp
+    exceptions/DatabaseException.cpp
+    exceptions/SystemCriticalException.cpp
 )
 
 # External cmake scripts
