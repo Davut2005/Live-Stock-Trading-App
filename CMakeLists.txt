@@ -29,12 +29,15 @@ set(PROJECT_SOURCES
     includes/TradingEngine.cpp
     includes/OrderBook.cpp
     includes/PerformanceAnalyzer.cpp
+    includes/MarketSimulator.cpp
+    includes/TechnicalAnalysis.cpp
 
     data/CryptoStockData.cpp
     data/EnergyStockData.cpp
     data/HealthStockData.cpp
     data/TechStockData.cpp
     data/TraderData.cpp
+    data/HistoricalData.cpp
 )
 
 # External cmake scripts

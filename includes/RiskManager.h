@@ -6,7 +6,7 @@
 
 class RiskManager {
 private:
-    double maxPositionValue;
+
     double maxSingleTradeValue;
 
 public:

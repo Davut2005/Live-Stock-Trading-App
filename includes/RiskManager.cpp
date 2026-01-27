@@ -1,7 +1,9 @@
 #include "RiskManager.h"
 
 RiskManager::RiskManager(double maxPosition, double maxTrade)
-    : maxPositionValue(maxPosition), maxSingleTradeValue(maxTrade) {}
+    : maxSingleTradeValue(maxTrade) {
+    (void)maxPosition; // Suppress unused parameter warning
+}
 
 bool RiskManager::validateOrder(const Trader& trader, const Order& order, double price) const {
     double tradeValue = order.getQuantity() * price;

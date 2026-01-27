@@ -9,8 +9,12 @@
 #include "./includes/TechStock.h"
 #include "./includes/Trader.h"
 
+#include "./includes/TechnicalAnalysis.h"
+#include "./includes/MarketSimulator.h"
+#include "./includes/HistoricalData.h"
 #include "./exceptions/StockErrors.h"
 #include "./exceptions/StockException.h"
+
 
 int main() {
 
@@ -94,6 +98,32 @@ int main() {
   trader.sellStock("BTC", 1, 32000.0);
 
   trader.display();
+
+  trader.display();
+
+  std::cout << "\n--- Technical Analysis (AAPL) ---\n";
+  if (HistoricalData::hasData("AAPL")) {
+      auto hist = HistoricalData::get("AAPL");
+      std::vector<double> closes;
+      for(const auto& p : hist) closes.push_back(p.close);
+      
+      auto sma20 = TechnicalAnalysis::calculateSMA(closes, 20);
+      auto rsi14 = TechnicalAnalysis::calculateRSI(closes, 14);
+      
+      std::cout << "Analysis for AAPL (" << closes.size() << " points):\n";
+      std::cout << "Last Price: " << closes.back() << "\n";
+      if(!sma20.empty()) std::cout << "SMA(20): " << sma20.back() << "\n";
+      if(!rsi14.empty()) std::cout << "RSI(14): " << rsi14.back() << "\n";
+  }
+
+  std::cout << "\n--- Market Simulation (Monte Carlo) ---\n";
+  MarketSimulator sim(150.0, 0.2, 0.05); // Price 150, 20% vol, 5% drift
+  auto res = sim.runMonteCarlo(1000, 30); // 1000 simulations, 30 days
+  
+  std::cout << "Simulation Results (30 days):\n";
+  std::cout << "Expected Price: " << res.expectedPrice << "\n";
+  std::cout << "Best Case (95%): " << res.bestCase << "\n";
+  std::cout << "Worst Case (5%): " << res.worstCase << "\n";
 
   std::cout << "\n--- End of Program ---\n";
   return 0;
