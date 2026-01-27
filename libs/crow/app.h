@@ -26,6 +26,7 @@
 #include <type_traits>
 #include <thread>
 #include <condition_variable>
+#include <mutex> 
 
 #include "./version.h"
 #include "./settings.h"

@@ -7,6 +7,16 @@ It provides an interactive dashboard where users can watch price movements, buy 
 Unlike typical web-only implementations, this project uses a high-performance C++ backend for handling live data and trading logic, ensuring low latency, efficiency, and near-real-time updates.
 
 This project demonstrates how frontend technologies and low-level programming can work together to build a modern, data-driven, and performance-oriented application.
+
+## Build (Windows)
+
+This project requires a modern compiler (GCC ≥ 9).
+
+On Windows, use:
+build_project.bat
+
+This ensures the correct MinGW toolchain is used.
+
 ### Folosiți template-ul corespunzător grupei voastre!
 
 | Laborant  | Link template                                |

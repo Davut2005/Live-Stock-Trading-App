@@ -22,6 +22,7 @@
 #include <memory>
 #include <thread>
 #include <vector>
+#include <mutex> 
 
 #include "./version.h"
 #include "./http_connection.h"
