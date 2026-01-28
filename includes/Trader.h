@@ -17,4 +17,7 @@ public:
   void credit(double amount);
   void display() const;
   double getBalance() const;
+  
+  Portfolio& getPortfolio() { return portfolio; }
+  const Portfolio& getPortfolio() const { return portfolio; }
 };

@@ -3,7 +3,7 @@
 #include <ctime>
 
 MarketDataException::MarketDataException(const std::string& msg, const std::string& source, const std::string& sym, int code)
-    : StockException(msg), dataSource(source), symbol(sym), errorCode(code), timestamp(std::time(nullptr)), isCritical(false) {
+    : StockException(msg), dataSource(source), symbol(sym), timestamp(std::time(nullptr)), errorCode(code), isCritical(false) {
 }
 
 void MarketDataException::setInvalidSnapshot(const std::string& snapshot) {

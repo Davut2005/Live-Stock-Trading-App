@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
     includes/StrategyOptimizer.cpp
     includes/PatternRecognition.cpp
 
+
     data/CryptoStockData.cpp
     data/EnergyStockData.cpp
     data/HealthStockData.cpp
@@ -68,9 +69,27 @@ set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/third-party/asio-asio-1-36-0/asio/incl
 add_executable(${MAIN_PROJECT_NAME} main.cpp ${PROJECT_SOURCES})
 add_executable(server server.cpp ${PROJECT_SOURCES})
 
+add_executable(cli
+    main_cli.cpp
+    cli/CLI.cpp
+    cli/CommandParser.cpp
+    cli/CommandHandlers.cpp
+    ${PROJECT_SOURCES}
+)
+
 # ---------------------------
 # Include directories
 # ---------------------------
+
+target_include_directories(cli PRIVATE
+    ${CMAKE_SOURCE_DIR}/includes
+    ${CMAKE_SOURCE_DIR}/cli
+    ${CMAKE_SOURCE_DIR}/data
+    ${CMAKE_SOURCE_DIR}/exceptions
+)
+
+# Link libraries if needed (e.g., for networking or threading)
+target_link_libraries(cli PRIVATE Threads::Threads)
 
 target_include_directories(${MAIN_PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/includes
@@ -94,6 +113,7 @@ if(WIN32)
     # Link server and oop with Windows networking libraries
     target_link_libraries(oop PRIVATE ws2_32 mswsock advapi32)
     target_link_libraries(server PRIVATE ws2_32 mswsock advapi32)
+    target_link_libraries(cli PRIVATE ws2_32 mswsock advapi32)
 endif()
 
 # ---------------------------
