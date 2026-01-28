@@ -41,6 +41,7 @@ set(PROJECT_SOURCES
     data/TechStockData.cpp
     data/TraderData.cpp
     data/HistoricalData.cpp
+    data/TransactionsData.cpp
 
     exceptions/MarketDataException.cpp
     exceptions/OrderExecutionException.cpp
