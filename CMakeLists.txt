@@ -67,13 +67,31 @@ set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/third-party/asio-asio-1-36-0/asio/incl
 # ---------------------------
 
 add_executable(${MAIN_PROJECT_NAME} main.cpp ${PROJECT_SOURCES})
-add_executable(server server.cpp ${PROJECT_SOURCES})
+add_executable(server 
+    server.cpp 
+    server/Server.cpp
+    server/routers/MarketRouter.cpp
+    server/routers/TradingRouter.cpp
+    server/routers/PortfolioRouter.cpp
+    server/routers/AnalysisRouter.cpp
+    server/routers/AdminRouter.cpp
+    server/Server.h
+    server/routers/MarketRouter.h
+    server/routers/TradingRouter.h
+    server/routers/PortfolioRouter.h
+    server/routers/AnalysisRouter.h
+    server/routers/AdminRouter.h
+    ${PROJECT_SOURCES}
+)
 
 add_executable(cli
     main_cli.cpp
     cli/CLI.cpp
     cli/CommandParser.cpp
     cli/CommandHandlers.cpp
+    cli/CLI.h
+    cli/CommandParser.h
+    cli/CommandHandlers.h
     ${PROJECT_SOURCES}
 )
 
@@ -104,6 +122,7 @@ target_include_directories(server PRIVATE
     ${CMAKE_SOURCE_DIR}/includes
     ${CMAKE_SOURCE_DIR}/exceptions
     ${CMAKE_SOURCE_DIR}/includes/Crow
+    ${CMAKE_SOURCE_DIR}/server
     ${ASIO_INCLUDE_DIR}
     /usr/include
 )

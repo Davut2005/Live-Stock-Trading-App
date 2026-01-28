@@ -1,50 +1,14 @@
 #define CROW_USE_ASIO
+#include "server/Server.h"
+#include <iostream>
 
-#include "server.h"
-#include "./libs/crow.h"  
-#include "./includes/TechStock.h"  
-#include <memory>
-
-Portfolio portfolio;
-Trader trader("Alice", 50000.0);
-
-void runServer() {
-    crow::SimpleApp app;
-
-    
-    CROW_ROUTE(app, "/stocks")
-    ([](){
-        std::ostringstream ss;
-        ss << "Portfolio:\n";
-        portfolio.showAllToStream(ss);         
-        return crow::response{ ss.str() };
-    });
-
-    
-    CROW_ROUTE(app, "/buy").methods(crow::HTTPMethod::Post)
-    ([&](const crow::request& req) {
-        auto body = crow::json::load(req.body);
-        if (!body) return crow::response(400, "Invalid JSON");
-
-        std::string name = body["name"].s();
-        double price = body["price"].d();
-        int quantity = body["quantity"].i();
-
-        try {
-            auto stock = std::make_unique<TechStock>(name, price); 
-            trader.buyStock(std::move(stock), quantity);
-        } catch (const std::exception& e) {
-            return crow::response(400, e.what());
-        }
-
-        return crow::response(200, "Stock bought successfully");
-    });
-
-    app.port(18080).multithreaded().run();
-}
-
-int main()
-{
-    runServer();
+int main() {
+    try {
+        Server server(18080);
+        server.run();
+    } catch (const std::exception& e) {
+        std::cerr << "Fatal error: " << e.what() << "\n";
+        return 1;
+    }
     return 0;
 }
