@@ -132,7 +132,7 @@ int main() {
   if (HistoricalData::hasData("AAPL")) {
       auto hist = HistoricalData::get("AAPL");
       std::vector<double> prices;
-      for(const auto& p : hist) prices.push_back(p.close);
+      for(const auto& point : hist) prices.push_back(point.close);
       
       // Limit data for speed in demo
       if(prices.size() > 500) prices.resize(500);
@@ -152,9 +152,9 @@ int main() {
        auto patterns = PatternRecognition::scan(hist);
        std::cout << "Found " << patterns.size() << " patterns in BTC history.\n";
        int count = 0;
-       for(const auto& p : patterns) {
+       for(const auto& pattern : patterns) {
            if(count++ > 5) break; 
-           std::cout << "Date: " << p.date << " Type: " << p.type << " Reliability: " << p.reliability << "\n";
+           std::cout << "Date: " << pattern.date << " Type: " << pattern.type << " Reliability: " << pattern.reliability << "\n";
        }
   }
 
