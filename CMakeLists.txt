@@ -146,7 +146,7 @@ set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_PROJECT_NAME})
 # Install & copy helpers
 # ---------------------------
 
-install(TARGETS ${MAIN_PROJECT_NAME} DESTINATION ${DESTINATION_DIR})
+install(TARGETS ${MAIN_PROJECT_NAME} server cli DESTINATION ${DESTINATION_DIR})
 
 copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_PROJECT_NAME})
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_PROJECT_NAME})
